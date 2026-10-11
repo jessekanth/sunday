@@ -1,0 +1,343 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Psalms Study Notes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@400;600&family=Noto+Sans+Telugu:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: sticky language bar, then chapters; each passage is a Telugu | English pair that stacks on phones. */
+:root{
+  --bg:#f2f5f6; --surface:#ffffff; --fg:#17232b; --muted:#5a6b75; --line:#d3dde2;
+  --accent:#0e5a63; --verse-bg:#e6f0f1; --verse-line:#0e5a63; --gold:#9a6212;
+  --f-te:"Noto Serif Telugu","Noto Sans Telugu",serif;
+  --f-en:"Newsreader",Georgia,serif;
+  --f-ui:"Public Sans",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10181d; --surface:#172228; --fg:#e4ecef; --muted:#93a5ae; --line:#2a3a43;
+  --accent:#6cc4cc; --verse-bg:#1b2d33; --verse-line:#6cc4cc; --gold:#e0a54f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10181d; --surface:#172228; --fg:#e4ecef; --muted:#93a5ae; --line:#2a3a43;
+  --accent:#6cc4cc; --verse-bg:#1b2d33; --verse-line:#6cc4cc; --gold:#e0a54f; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-en);font-size:18px;line-height:1.6;padding-inline:16px}
+.wrap{max-width:1040px;margin-inline:auto;padding-block:0 64px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding-block:10px;margin-inline:-16px;padding-inline:16px}
+.brand{font-family:var(--f-ui);font-weight:600;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
+.seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface)}
+.seg button{font:600 13px var(--f-ui);padding:7px 14px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+.seg button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.hero{padding-block:36px 12px}
+.hero h1{font-family:var(--f-te);font-size:clamp(30px,6vw,46px);line-height:1.25;margin:0;text-wrap:balance}
+.hero p{font-family:var(--f-en);font-size:20px;color:var(--muted);margin:6px 0 0}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;margin-block:20px 8px}
+nav.toc a{font:13px var(--f-ui);color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:var(--surface)}
+section{padding-block:34px 4px;border-top:1px solid var(--line);margin-top:28px;scroll-margin-top:70px}
+h2{margin:0 0 14px;display:grid;grid-template-columns:1fr 1fr;gap:20px;font-weight:600;text-wrap:balance}
+h2 .te{font-family:var(--f-te);font-size:23px;line-height:1.35}
+h2 .en{font-family:var(--f-ui);font-size:19px;color:var(--accent)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px}
+.pair>*{min-width:0}
+.te{font-family:var(--f-te);font-size:17px;line-height:1.95}
+.en{font-family:var(--f-en);font-size:18.5px}
+.pair p,.pair ul,.pair ol{margin:0 0 8px}
+.pair li{margin-bottom:4px}
+.verse{background:var(--verse-bg);border-left:3px solid var(--verse-line);padding:10px 14px;border-radius:0 6px 6px 0}
+.verse .ref{display:block;font:600 12px var(--f-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.note{font:14px var(--f-ui);color:var(--muted)}
+.tablewrap{overflow-x:auto;margin-bottom:16px}
+table{border-collapse:collapse;width:100%;min-width:480px;font-family:var(--f-ui);font-size:15px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+td .te{font-size:15px;line-height:1.6} td .en{font-size:15px}
+/* language modes */
+#app[data-lang="te"] .en,#app[data-lang="en"] .te{display:none}
+#app[data-lang="te"] .pair,#app[data-lang="en"] .pair,#app[data-lang="te"] h2,#app[data-lang="en"] h2{grid-template-columns:1fr}
+#app[data-lang="en"] td .te,#app[data-lang="te"] td .en{display:none}
+@media (max-width:760px){.pair,h2{grid-template-columns:1fr;gap:8px}.pair{margin-bottom:22px}}
+</style>
+
+<div id="app" data-lang="both">
+<div class="wrap">
+<header class="top">
+  <span class="brand">Psalms 1 · Study Notes</span>
+  <div class="seg" role="group" aria-label="Language">
+    <button type="button" data-set="both" aria-pressed="true">తెలుగు + English</button>
+    <button type="button" data-set="te" aria-pressed="false">తెలుగు</button>
+    <button type="button" data-set="en" aria-pressed="false">English</button>
+  </div>
+</header>
+
+<div class="hero">
+  <h1><span class="te">కీర్తనల గ్రంథం – పరిచయం మరియు కీర్తన 1</span><span class="en">The Book of Psalms: Introduction and Psalm 1</span></h1>
+  <p class="en">Bilingual notes from a Telugu Bible class on "Do not walk in the counsel of the wicked".</p>
+  <nav class="toc" id="toc"></nav>
+</div>
+
+<section id="s1">
+<h2><span class="te">1. పరిచయం</span><span class="en">1. Introduction</span></h2>
+<div class="pair">
+<div class="te"><p>బైబిల్‌లో మొత్తం 66 పుస్తకాలు. పాత నిబంధనలో అత్యధిక అధ్యాయాలు, భాగాలు ఉన్న పుస్తకం కీర్తనల గ్రంథం. దీనికి స్తుతుల గ్రంథము అనే పేరు కూడా ఉంది.</p><p>దీనిని "దావీదు కీర్తనలు" అని పిలుస్తారు. కానీ 150 కీర్తనలనూ దావీదు రాయలేదు.</p></div>
+<div class="en"><p>The Bible has 66 books. The Psalms has the most chapters and sections in the Old Testament. It is also called the Book of Praises, full of songs and hymns that praise God.</p><p>It is known as "the Psalms of David", yet David did not write all 150 psalms.</p></div>
+</div>
+</section>
+
+<section id="s2">
+<h2><span class="te">2. కీర్తనల రచయితలు</span><span class="en">2. The authors</span></h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Author / రచయిత</th><th>Psalms / కీర్తనలు</th></tr></thead>
+<tbody>
+<tr><td><span class="te">దావీదు</span><span class="en">David</span></td><td class="n">73</td></tr>
+<tr><td><span class="te">ఆసాపు</span><span class="en">Asaph</span></td><td class="n">12</td></tr>
+<tr><td><span class="te">కోరహు కుమారులు</span><span class="en">Sons of Korah</span></td><td class="n">10 (<span class="te">అనుకుంటాను</span><span class="en">approx.</span>)</td></tr>
+<tr><td><span class="te">సొలోమోను (127వ కీర్తన)</span><span class="en">Solomon (Psalm 127)</span></td><td class="n">2</td></tr>
+<tr><td><span class="te">మోషే (90వ కీర్తన)</span><span class="en">Moses (Psalm 90)</span></td><td class="n">1</td></tr>
+<tr><td><span class="te">హేమాను మరియు ఏతాను</span><span class="en">Heman and Ethan</span></td><td class="n">1 <span class="te">(ఇద్దరూ కలిసి)</span><span class="en">(together)</span></td></tr>
+<tr><td><span class="te">ఎజ్రా</span><span class="en">Ezra</span></td><td><span class="te">కొందరి అభిప్రాయం; ఆధారాలు తక్కువ</span><span class="en">Some think so; little evidence</span></td></tr>
+<tr><td><span class="te">తెలియనివారు</span><span class="en">Unknown</span></td><td class="n">49</td></tr>
+</tbody></table></div>
+<div class="pair">
+<div class="te verse"><span class="ref">కీర్తన 127:1</span>యెహోవా ఇల్లు కట్టించని యెడల కట్టువారి ప్రయాసము వ్యర్థమే.</div>
+<div class="en verse"><span class="ref">Psalm 127:1</span>Unless the LORD builds the house, those who build it labour in vain.</div>
+</div>
+</section>
+
+<section id="s3">
+<h2><span class="te">3. ఐదు స్కంధాలు</span><span class="en">3. The five books</span></h2>
+<div class="pair">
+<div class="te"><p>150 కీర్తనలను విభాగాలుగా విభజించారు. ఒక్కొక్క విభాగం ఒక స్కంధము.</p></div>
+<div class="en"><p>The 150 psalms are divided into five sections, each called a "book" (Skandha in Telugu).</p></div>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Psalms / కీర్తనలు</th><th><span class="te">ముగింపు వచనం</span><span class="en">Closing doxology</span></th></tr></thead>
+<tbody>
+<tr><td><span class="te">ప్రథమ</span><span class="en">Book 1</span></td><td class="n">1–41</td><td class="n">41:13</td></tr>
+<tr><td><span class="te">ద్వితీయ</span><span class="en">Book 2</span></td><td class="n">42–72</td><td class="n">72:19</td></tr>
+<tr><td><span class="te">తృతీయ</span><span class="en">Book 3</span></td><td class="n">73–89</td><td class="n">89:52</td></tr>
+<tr><td><span class="te">చతుర్థ</span><span class="en">Book 4</span></td><td class="n">90–106</td><td class="n">106:48</td></tr>
+<tr><td><span class="te">పంచమ</span><span class="en">Book 5</span></td><td class="n">107–150</td><td class="n">150</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="s4">
+<h2><span class="te">4. ప్రతి స్కంధం స్తుతితో ముగుస్తుంది</span><span class="en">4. Every book ends in praise</span></h2>
+<div class="pair">
+<div class="te"><p>స్కంధాలు సమానం కావు, కానీ అన్నిటిలో ఒక ఉమ్మడి లక్షణం ఉంది: ప్రతి స్కంధం దేవుని స్తుతితో ముగుస్తుంది.</p></div>
+<div class="en"><p>The books are unequal in length, but they share one feature: each closes with a doxology, a line of praise to God.</p></div>
+</div>
+<div class="pair">
+<div class="te verse"><span class="ref">కీర్తన 41</span>ఇశ్రాయేలు దేవుడైన యెహోవా శాశ్వతకాలము నుండి శాశ్వతకాలము వరకు స్తుతింపబడును గాక.</div>
+<div class="en verse"><span class="ref">Psalm 41</span>Blessed be the LORD, the God of Israel, from everlasting to everlasting.</div>
+</div>
+<div class="pair">
+<div class="te verse"><span class="ref">కీర్తన 72:19</span>ఆయన మహిమగల నామము నిత్యము స్తుతింపబడును గాక. సర్వభూమియు ఆయన మహిమతో నిండి ఉండును గాక.</div>
+<div class="en verse"><span class="ref">Psalm 72:19</span>Blessed be his glorious name forever; may the whole earth be filled with his glory.</div>
+</div>
+<div class="pair">
+<div class="te verse"><span class="ref">కీర్తన 89:52</span>యెహోవా నిత్యము స్తుతినొందును గాక.</div>
+<div class="en verse"><span class="ref">Psalm 89:52</span>Blessed be the LORD forever.</div>
+</div>
+<div class="pair">
+<div class="te verse"><span class="ref">కీర్తన 106</span>ఇశ్రాయేలీయుల దేవుడైన యెహోవా యుగములన్నిటను స్తుతినొందును గాక.</div>
+<div class="en verse"><span class="ref">Psalm 106</span>Blessed be the LORD, the God of Israel, from everlasting to everlasting.</div>
+</div>
+<div class="pair">
+<div class="te verse"><span class="ref">కీర్తన 150</span>సకల ప్రాణులు యెహోవాను స్తుతించుదురు గాక. యెహోవాను స్తుతించుడి.</div>
+<div class="en verse"><span class="ref">Psalm 150</span>Let everything that has breath praise the LORD. Praise the LORD.</div>
+</div>
+</section>
+
+<section id="s5">
+<h2><span class="te">5. కీర్తన 1</span><span class="en">5. Psalm 1</span></h2>
+<div class="pair">
+<div class="te verse"><span class="ref">కీర్తన 1:1–6</span>
+దుష్టుల ఆలోచన చొప్పున నడువక, పాపుల మార్గమున నిలువక, అపహాసకులు కూర్చుండు చోటను కూర్చుండక, యెహోవా ధర్మశాస్త్రమునందు ఆనందించుచు దివారాత్రము దానిని ధ్యానించువాడు ధన్యుడు.<br>
+అతడు నీటికాలువల యొద్ద నాటబడినదై, ఆకు వాడక తన కాలమందు ఫలమిచ్చు చెట్టువలె ఉండును. అతడు చేయునదంతయు సఫలమగును.<br>
+దుష్టులు ఆలాగున ఉండక, గాలి చెదరగొట్టు పొట్టువలె ఉందురు.<br>
+కాబట్టి న్యాయవిమర్శలో దుష్టులును, నీతిమంతుల సభలో పాపులును నిలువరు.<br>
+నీతిమంతుల మార్గము యెహోవాకు తెలియును, దుష్టుల మార్గము నాశనమునకు నడుపును.</div>
+<div class="en verse"><span class="ref">Psalm 1:1–6</span>
+Blessed is the one who does not walk in the counsel of the wicked, nor stand in the way of sinners, nor sit in the seat of mockers, but delights in the law of the LORD and meditates on it day and night.<br>
+He is like a tree planted by streams of water, which yields its fruit in season and whose leaf does not wither. Whatever he does prospers.<br>
+Not so the wicked; they are like chaff that the wind drives away.<br>
+So the wicked will not stand in the judgment, nor sinners in the assembly of the righteous.<br>
+For the LORD knows the way of the righteous, but the way of the wicked will perish.</div>
+</div>
+<div class="pair">
+<div class="te"><p>ఈ కీర్తన అందరికీ తెలిసినదే. సండే స్కూల్‌లో కంఠస్థం చేయిస్తారు.</p></div>
+<div class="en"><p>Almost everyone knows this psalm; Sunday school teachers have children memorise it.</p></div>
+</div>
+</section>
+
+<section id="s6">
+<h2><span class="te">6. కీర్తన 1:1 – "చేయకూడనివి" ముందు</span><span class="en">6. Psalm 1:1: the "don'ts" come first</span></h2>
+<div class="pair">
+<div class="te"><p>భక్తుడు ఏం చేయాలో చెప్పే ముందు ఏం చేయకూడదో చెప్తున్నాడు. కొన్ని నిర్ణయాలు negative decisions గా ఉండాలి.</p>
+<ul><li>దుష్టుల ఆలోచన చొప్పున నడవకూడదు</li><li>పాపుల మార్గమున నిలవకూడదు</li><li>అపహాసకులు కూర్చుండు చోట కూర్చుండకూడదు</li></ul>
+<p>నడక, నిలుకడ, కూర్చోవడం: ఎంత కట్టుదిట్టం చేశాడో చూడండి.</p></div>
+<div class="en"><p>Before saying what to do, the psalmist says what not to do. Some of our decisions need to be negative decisions.</p>
+<ul><li>Do not walk in the counsel of the wicked</li><li>Do not stand in the way of sinners</li><li>Do not sit where mockers sit</li></ul>
+<p>Walking, standing, sitting: notice how thoroughly it is fenced in.</p></div>
+</div>
+<div class="pair">
+<div class="te"><p><b>వేటపాలెం ఆనందం గారి ఉదాహరణ:</b> ఒక యువకుడు "అయ్యగారూ, మరి పడుకోవచ్చండి?" అన్నాడు. ఆయన, "పడుకోవాలంటే ముందు మంచం మీద కూర్చుంటావు కదా? కూర్చోవద్దంటే ఇక పడుకునేది ఎక్కడ?" అని నవ్వించారు.</p>
+<p><b>వివేచన:</b> బైబిల్‌లో ప్రతిదీ అక్షరాలా రాసి ఉండదు. కొన్ని basic principles ఉంటాయి. పరిశుద్ధాత్మ ద్వారా దేవుడు ఇచ్చే విచక్షణే (discernment) మనకు కావాలి.</p></div>
+<div class="en"><p><b>Illustration (Pastor Anandam of Vetapalem):</b> A young man asked, "Sir, may we lie down then?" The pastor replied, "To lie on a bed you first sit on it. If sitting is out, where would you lie down?"</p>
+<p><b>Discernment:</b> Scripture does not spell out every case. It gives basic principles, and the Holy Spirit gives the discernment to apply them. We need not object that "this isn't in the Bible".</p></div>
+</div>
+</section>
+
+<section id="s7">
+<h2><span class="te">7. దుష్టుడు ఎవరు? సాతానే</span><span class="en">7. Who is "the wicked one"? Satan</span></h2>
+<div class="pair">
+<div class="te verse"><span class="ref">1 యోహాను 5:19</span>మనము దేవుని సంబంధులమనియు లోకమంతయు దుష్టుని యందున్నదనియు ఎరుగుదుము.</div>
+<div class="en verse"><span class="ref">1 John 5:19</span>We know that we are children of God, and that the whole world lies under the power of the evil one.</div>
+</div>
+<div class="pair">
+<div class="te verse"><span class="ref">యోహాను 14:30</span>లోకాధికారి వచ్చుచున్నాడు. అతనితో నాకేమి పని.</div>
+<div class="en verse"><span class="ref">John 14:30</span>The ruler of this world is coming. He has no claim on me.</div>
+</div>
+<div class="pair">
+<div class="te verse"><span class="ref">2 కొరింథీ 4:4</span>ఈ యుగ సంబంధమైన దేవత అవిశ్వాసుల మనోనేత్రములకు గుడ్డితనము కలుగజేయును.</div>
+<div class="en verse"><span class="ref">2 Corinthians 4:4</span>The god of this age has blinded the minds of unbelievers.</div>
+</div>
+<div class="pair">
+<div class="te"><p>కాబట్టి "దుష్టుడు" అంటే సాతాను, లోకాధికారి.</p></div>
+<div class="en"><p>So "the wicked one" is Satan, the ruler of this world.</p></div>
+</div>
+</section>
+
+<section id="s8">
+<h2><span class="te">8. దుష్టుడు ఆలోచన ఇస్తాడు</span><span class="en">8. He offers "counsel"</span></h2>
+<div class="pair">
+<div class="te"><p>మనం గందరగోళంలో, cross roads లో ఉన్నప్పుడు దుష్టుడు ఒక సలహాలా ఆలోచన ఇస్తాడు. అది దుష్టుని ఆలోచన అయితే దాని చొప్పున నడవకూడదు. బైబిల్‌లో మూడు ఉదాహరణలు:</p></div>
+<div class="en"><p>When we are confused or at a crossroads, the wicked one steps in with a suggestion. If the idea is his, we must not walk by it. Three examples from Scripture:</p></div>
+</div>
+
+<h2 style="margin-top:22px"><span class="te">ఉదాహరణ 1: ఆదాము, హవ్వ</span><span class="en">Example 1: Adam and Eve</span></h2>
+<div class="pair">
+<div class="te verse"><span class="ref">ఆదికాండము 3:1</span>అది స్త్రీని చూచి — ఇది నిజమా? తోటలోని చెట్లలో దేని ఫలములనైనను మీరు తినకూడదని దేవుడు చెప్పెనా?</div>
+<div class="en verse"><span class="ref">Genesis 3:1</span>He said to the woman, "Did God really say you must not eat from any tree in the garden?"</div>
+</div>
+<div class="pair">
+<div class="te"><p>దేవుడు స్పష్టంగా చెప్పాడు (ఆది 2:16–17). సర్పం ఎక్కువ మాట్లాడలేదు, "ఇది నిజమా?" అని ఒక అనుమానం రేకెత్తించింది. ఆమె లొంగిపోయింది, పాపం లోకమంతటికీ వచ్చింది. పాపానికి కుల, మత, లింగ, చదువు భేదాలు లేవు.</p>
+<p>"మీరు దేవతల్లా ఉంటారు" అన్నాడు. కానీ వారు అప్పటికే దేవుని స్వరూపంలో ఉన్నారు; అది promotion కాదు, degradation.</p>
+<p>"అనుమానం పెనుభూతం": అనుమానాన్ని మనసులోకి రానీయకండి.</p></div>
+<div class="en"><p>God had spoken plainly (Gen 2:16–17). The serpent gave no long speech. He planted doubt with "Did God really say?" She yielded, and sin reached the whole world. Sin makes no distinction of caste, religion, gender or education.</p>
+<p>He promised they would be "like gods". But they were already made in God's image, so this was a step down, not up.</p>
+<p>A Telugu proverb says doubt is a great ghost. Do not let doubt settle in your mind.</p></div>
+</div>
+
+<h2 style="margin-top:22px"><span class="te">ఉదాహరణ 2: యూదా ఇస్కరియోతు</span><span class="en">Example 2: Judas Iscariot</span></h2>
+<div class="pair">
+<div class="te verse"><span class="ref">యోహాను 13:2</span>వారు భోజనము చేయుచుండగా ఆయనను అప్పగింపవలెనని సీమోను కుమారుడగు ఇస్కరియోతు యూదా హృదయములో అపవాది ఇంతకు ముందే ఆలోచన పుట్టించెను.</div>
+<div class="en verse"><span class="ref">John 13:2</span>The devil had already prompted Judas Iscariot, son of Simon, to betray him.</div>
+</div>
+<div class="pair">
+<div class="te"><p>యూదా యేసుతో తిని, తాగి, ఆయన మహిమలు చూసినవాడు. అలాంటివాడినే పడేసినవాడు, నిన్ను నన్ను పడేయలేడా? జాగ్రత్త.</p></div>
+<div class="en"><p>Judas ate with Jesus, heard his teaching and saw his glory. If the devil could bring down someone that close, he can bring down any of us. Be careful.</p></div>
+</div>
+
+<h2 style="margin-top:22px"><span class="te">ఉదాహరణ 3: సంఘం – కన్యక</span><span class="en">Example 3: The church as a bride</span></h2>
+<div class="pair">
+<div class="te verse"><span class="ref">2 కొరింథీ 11:2–3</span>పవిత్రురాలైన కన్యకగా ఒక్కడే పురుషునికి, అనగా క్రీస్తుకు, సమర్పింపవలెనని మిమ్మును ప్రధానము చేసితిని. సర్పము తన కుయుక్తిచేత హవ్వను మోసపరచినట్లు మీ మనస్సులు చెరుపబడునేమో అని భయపడుచున్నాను.</div>
+<div class="en verse"><span class="ref">2 Corinthians 11:2–3</span>I promised you to one husband, to present you as a pure virgin to Christ. But I am afraid that as the serpent deceived Eve by his cunning, your minds may be led astray.</div>
+</div>
+<div class="pair">
+<div class="te"><p>పౌలు పెద్దగా ఉండి సంఘాన్ని క్రీస్తుకు ప్రధానం చేశాడు. సాతాను దేహాన్ని కాదు, మనస్సులను చెరుపుతాడు. పెండ్లి అయ్యేవరకు మన మనసు కాబోయే భర్త మీదే ఉండాలి.</p>
+<p><b>యూదుల ఆచారం:</b> ప్రధానానికి, పెండ్లికి కనీసం ఒక సంవత్సరం గడువు. కారణాలు: (1) భర్త నివాస స్థలం సిద్ధం చేయడానికి; ప్రభువు కూడా "స్థలము సిద్ధపరచుటకు వెళ్ళుచున్నాను" అన్నాడు. (2) కన్యత్వం నిరూపణకు.</p></div>
+<div class="en"><p>Paul, as an elder, betrothed the church to Christ. Satan corrupts minds, not bodies. Until the wedding, our thoughts should stay on our coming husband.</p>
+<p><b>Jewish custom:</b> At least a year passed between betrothal and wedding, for two reasons: (1) the groom prepares a home, as Jesus said, "I go to prepare a place for you"; (2) the bride's purity is confirmed over that time.</p></div>
+</div>
+</section>
+
+<section id="s9">
+<h2><span class="te">9. అపవాదిని ఎదిరించుట</span><span class="en">9. Resisting the devil</span></h2>
+<div class="pair">
+<div class="te verse"><span class="ref">యాకోబు 4:7</span>దేవునికి లోబడి యుండుడి; అపవాదిని ఎదిరించుడి, అప్పుడు వాడు మీయొద్దనుండి పారిపోవును.</div>
+<div class="en verse"><span class="ref">James 4:7</span>Submit yourselves to God. Resist the devil, and he will flee from you.</div>
+</div>
+<div class="pair">
+<div class="te"><p>క్రమం: లోబడండి, ఎదిరించండి, వాడు పారిపోతాడు. దేవునికి లోబడడమే మన బలం. అపవాది లోపల బలహీనుడే.</p></div>
+<div class="en"><p>The order is: submit, resist, and he flees. Submission to God is our strength. The devil is weak within.</p></div>
+</div>
+</section>
+
+<section id="s10">
+<h2><span class="te">10. సర్వాంగ కవచము (ఎఫెసీ 6)</span><span class="en">10. The full armour of God (Ephesians 6)</span></h2>
+<div class="pair">
+<div class="te verse"><span class="ref">ఎఫెసీ 6:11</span>అపవాది తంత్రములను ఎదిరించుటకు దేవుడిచ్చు సర్వాంగ కవచమును ధరించుకొనుడి.</div>
+<div class="en verse"><span class="ref">Ephesians 6:11</span>Put on the full armour of God, so that you can stand against the devil's schemes.</div>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Telugu</th><th>English</th></tr></thead>
+<tbody>
+<tr><td class="n">1</td><td>సత్యమనే దట్టీ (నడుము)</td><td>Belt of truth</td></tr>
+<tr><td class="n">2</td><td>నీతియనెడు మైమరువు</td><td>Breastplate of righteousness</td></tr>
+<tr><td class="n">3</td><td>సమాధాన సువార్త సిద్ధమనస్సు (పాదములకు)</td><td>Readiness of the gospel of peace (feet)</td></tr>
+<tr><td class="n">4</td><td>విశ్వాసమను డాలు</td><td>Shield of faith</td></tr>
+<tr><td class="n">5</td><td>రక్షణయను శిరస్త్రాణము</td><td>Helmet of salvation</td></tr>
+<tr><td class="n">6</td><td>దేవుని వాక్యమను ఆత్మఖడ్గము</td><td>Sword of the Spirit, the word of God</td></tr>
+<tr><td class="n">7</td><td>ప్రతివిధమైన ప్రార్థన, విజ్ఞాపన</td><td>All kinds of prayer and petition</td></tr>
+</tbody></table></div>
+<div class="pair">
+<div class="te"><p><b>సత్యం అంటే సిద్ధాంతం కూడా:</b> "Doctrinal evil is as bad as moral evil." మంచి ప్రవర్తన ఉన్నా, తప్పు బోధను అనుసరిస్తే ప్రమాదమే.</p>
+<p><b>Defense – Offense (కబడ్డీ ఉదాహరణ):</b> చాలా భాగాలు కాపాడుకునేవి. అయితే విశ్వాసమను డాలుతో వాడి మీద దాడి కూడా చేయాలి.</p></div>
+<div class="en"><p><b>Truth includes doctrine:</b> "Doctrinal evil is as bad as moral evil." Good conduct does not make up for following wrong teaching.</p>
+<p><b>Defence and offence (kabaddi analogy):</b> Most pieces defend us from his arrows and schemes, but we are also to push back with the shield of faith.</p></div>
+</div>
+</section>
+
+<section id="s11">
+<h2><span class="te">11. అపవాదికి చోటియ్యకుడి</span><span class="en">11. Give the devil no foothold</span></h2>
+<div class="pair">
+<div class="te verse"><span class="ref">ఎఫెసీ 4:27</span>అపవాదికి చోటియ్యకుడి.</div>
+<div class="en verse"><span class="ref">Ephesians 4:27</span>Do not give the devil a foothold.</div>
+</div>
+<div class="pair">
+<div class="te"><p><b>బస్సు ఉదాహరణ:</b> రద్దీ బస్సులో కొందరు కర్చీఫ్ వేసి సీటు అంతా ఆక్రమిస్తారు. అపవాది విషయంలో అలాగే చోటివ్వకూడదు. ఒకసారి పక్కన కూర్చుంటే వాడు తన gang ని పిలుచుకుంటాడు.</p></div>
+<div class="en"><p><b>Bus illustration:</b> On a crowded bus some people spread a handkerchief to hold the whole seat. Do that with the devil. Once he sits beside you, he calls in his gang.</p></div>
+</div>
+</section>
+
+<section id="s12">
+<h2><span class="te">12. ఖాళీ ఇల్లు, ఏడు దయ్యాలు</span><span class="en">12. The empty house and seven spirits</span></h2>
+<div class="pair">
+<div class="te verse"><span class="ref">మత్తయి 12:43–45</span>అపవిత్రాత్మ ఒక మనుష్యుని వదిలిపోయిన తరువాత… నేను వదలివచ్చిన నా ఇంటికి తిరిగి వెళ్ళుదునని… ఆ ఇల్లు ఖాళీగా ఉండి, ఊడ్చి అమర్చబడి ఉండుట చూచి, వెళ్లి తనకంటె చెడ్డవైన మరి యేడు దయ్యములను వెంట బెట్టుకొని వచ్చును… ఆ మనుష్యుని కడపటి స్థితి మొదటి స్థితికంటె చెడ్డదగును.</div>
+<div class="en verse"><span class="ref">Matthew 12:43–45</span>When an unclean spirit leaves a person… it says, "I will return to my house." It finds it empty, swept and put in order. Then it brings seven other spirits more wicked than itself, and the last state of that person is worse than the first.</div>
+</div>
+<div class="pair">
+<div class="te"><p><b>పాఠం – Spiritual vacuum:</b> పాపాలు ఒప్పుకుని క్షమాపణ పొందిన తర్వాత హృదయాన్ని ఖాళీగా ఉంచకూడదు. దాన్ని దేవుని వాక్యంతో నింపుకోవాలి (కొలొస్సీ 3:16).</p>
+<p>వాక్యం చదవడం, ప్రార్థన, సంఘ సహవాసం, పరిచర్య, దాతృత్వం, సత్కార్యాలు: అన్నిటిలో busy గా ఉండాలి. నమ్మినట్టు చెప్పి వెనక్కి జారిపోవడం చాలా ప్రమాదకరం.</p></div>
+<div class="en"><p><b>Lesson, the spiritual vacuum:</b> After confessing sin and being forgiven, do not leave the heart empty. Fill it with God's word (Col 3:16).</p>
+<p>Stay busy in the word, prayer, fellowship, service, giving and good works. To claim faith and then drift back is very dangerous.</p></div>
+</div>
+</section>
+
+<section id="s13">
+<h2><span class="te">13. ముగింపు</span><span class="en">13. Closing</span></h2>
+<div class="pair">
+<div class="te"><p>కీర్తన 1:1 లోని మొదటి మాట "దుష్టుల ఆలోచన చొప్పున నడువక" గురించే ఈ తరగతిలో చూశాం. దుష్టుల పట్ల జాగ్రత్తగా ఉండాలి. (పాపుల మార్గము, అపహాసకుల స్థానం తదుపరి.)</p></div>
+<div class="en"><p>This session covered only the first phrase of Psalm 1:1, "not walking in the counsel of the wicked". Stay watchful. (The way of sinners and the seat of mockers come next.)</p></div>
+</div>
+<p class="note">Source: class transcript. Unclear passages in the recording were left out. English verses are paraphrased renderings, not a specific published translation.</p>
+</section>
+</div>
+</div>
+
+<script>
+(function(){
+  var app=document.getElementById('app');
+  var btns=document.querySelectorAll('.seg button');
+  function set(l){app.dataset.lang=l;btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.set===l))});
+    try{localStorage.setItem('psalms-lang',l)}catch(e){}}
+  btns.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.set)})});
+  try{var s=localStorage.getItem('psalms-lang');if(s)set(s)}catch(e){}
+  var toc=document.getElementById('toc');
+  document.querySelectorAll('section').forEach(function(s,i){
+    var t=s.querySelector('h2 .en').textContent.replace(/^\d+\.\s*/,'');
+    var a=document.createElement('a');a.href='#'+s.id;a.textContent=(i+1)+' · '+t;toc.appendChild(a);
+  });
+})();
+</script>
+
+</body></html>
